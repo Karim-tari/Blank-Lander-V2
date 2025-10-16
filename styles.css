@@ -1,0 +1,596 @@
+/* TT Commons Font Family */
+@font-face {
+    font-family: 'TT Commons';
+    src: url('assets/fonts/TypeType - TT Commons Regular.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'TT Commons';
+    src: url('assets/fonts/TypeType - TT Commons Medium.otf') format('opentype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'TT Commons';
+    src: url('assets/fonts/TypeType - TT Commons DemiBold.otf') format('opentype');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'TT Commons';
+    src: url('assets/fonts/TypeType - TT Commons Bold.otf') format('opentype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'TT Commons', sans-serif;
+    background-color: #050505;
+    color: #ffffff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    position: relative;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('assets/BG.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -1;
+    opacity: 0;
+    animation: fadeInBackground 3s ease-out 0.5s forwards;
+}
+
+@keyframes fadeInBackground {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.container {
+    max-width: 1728px;
+    width: 100%;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    justify-content: center;
+    margin: 0 auto;
+    position: relative;
+}
+
+.content {
+    max-width: 500px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    align-items: flex-start;
+    text-align: left;
+    padding: 0 20px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.logo img {
+    width: 165.79px;
+    height: 33px;
+    display: block;
+}
+
+.main-text {
+    width: 100%;
+}
+
+.main-text p {
+    font-family: 'TT Commons', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 30px;
+    line-height: 36px;
+    font-weight: 400;
+    font-style: normal;
+    color: #FFF;
+    margin: 0;
+}
+
+.main-text .word {
+    display: inline-block;
+    white-space: nowrap;
+    color: #eee;
+}
+
+.cta-wrapper {
+    width: 100%;
+    position: relative;
+    height: 62px;
+}
+
+.cta-container {
+    width: 100%;
+    position: relative;
+    height: 62px;
+}
+
+.success-message {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 62px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.success-message span {
+    font-size: 20px;
+    font-weight: 400;
+    font-family: 'TT Commons', sans-serif;
+    color: #ffffff;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    display: inline-flex;
+}
+
+.success-text .char {
+    display: inline-block;
+}
+
+.cta-input {
+    width: 100%;
+    height: 62px;
+    background-color: transparent;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+    border-radius: 60px;
+    font-size: 16px;
+    font-weight: 500;
+    font-family: 'TT Commons', sans-serif;
+    padding: 0 240px 0 30px;
+    backdrop-filter: blur(32.5px);
+    outline: none;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.cta-input::placeholder {
+    color: #ffffff;
+    opacity: 0.8;
+}
+
+.cta-input:focus {
+    border-color: #ffffff;
+}
+
+.cta-input.error {
+    border-color: #ff4444;
+    animation: shake 0.4s;
+}
+
+.cta-input.success {
+    border-color: #00ff88;
+}
+
+.cta-message {
+    position: absolute;
+    bottom: -30px;
+    left: 30px;
+    font-size: 14px;
+    font-family: 'TT Commons', sans-serif;
+    font-weight: 500;
+    opacity: 0;
+    transform: translateY(-10px);
+    margin: 0;
+}
+
+.cta-message.error {
+    color: #ff4444;
+}
+
+.cta-message.success {
+    color: #00ff88;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    75% { transform: translateX(10px); }
+}
+
+.cta-submit-button {
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 50px;
+    padding: 0 30px;
+    background-color: #ffffff;
+    color: #000000;
+    border: 2px solid transparent;
+    border-radius: 60px;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: 'TT Commons', sans-serif;
+    cursor: pointer;
+    overflow: hidden;
+    transition: color 0.35s cubic-bezier(0.4, 0, 0.2, 1), 
+                box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                border-color 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 2;
+}
+
+.cta-submit-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background-color: #000000;
+    border-radius: 60px;
+    transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: -1;
+}
+
+.cta-submit-button:hover {
+    color: #ffffff;
+    border-color: #ffffff;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.cta-submit-button:hover::before {
+    width: 100%;
+}
+
+.cta-submit-button:hover .button-text-label {
+    transform: translateX(0);
+}
+
+.cta-submit-button:active {
+    transform: translateY(-50%) scale(0.98);
+}
+
+.button-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0px;
+    position: relative;
+    width: 100%;
+}
+
+.button-text-label {
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.button-arrow-icon {
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    position: absolute;
+    right: 30px;
+}
+
+.yt-thumb-container {
+    width: 100%;
+    margin-top: 80px;
+    position: relative;
+    z-index: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.yt-thumb {
+    width: 100%;
+    max-width: 530px;
+    height: auto;
+    border-radius: 16px;
+    display: block;
+    opacity: 0.9;
+    transition: opacity 0.3s ease;
+    transform: scale(1.5);
+    transform-origin: center;
+    display:none;
+}
+
+.yt-thumb:hover {
+    opacity: 1;
+}
+
+.cursor-product {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    width: 140px;
+    height: 140px;
+    object-fit: contain;
+    opacity: 0;
+    filter: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.4));
+}
+
+@media (max-width: 768px) {
+    .cursor-product {
+        display: none;
+    }
+}
+
+.brands-wrapper {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    margin-top: -100px;
+    z-index: 10;
+}
+
+.brands-section {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    gap: 20px;
+    padding: 0 40px;
+}
+
+.divider-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, #919191, transparent);
+    max-width: 600px;
+    opacity: 0;
+}
+
+.divider-line.left {
+    background: linear-gradient(to right, transparent, #919191)
+}
+
+.divider-line.right {
+    background: linear-gradient(to left, transparent, #919191);
+}
+
+.brands-text {
+    font-size: 14px;
+    color: #eee;
+    text-transform: uppercase;
+    letter-spacing: 1.1px;
+    font-weight: 300;
+    text-align: center;
+    white-space: nowrap;
+    opacity: 0;
+}
+
+.brands-carousel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 45px;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 100vw;
+    padding: 20px 40px 40px 40px;
+}
+
+.brand-logo {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.brand-logo:hover {
+    opacity: 1;
+}
+
+.brand-logo img {
+    max-height: 100%;
+    max-width: 120px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+}
+
+/* PNG logos are 2x size, so scale them down by 50% */
+.brand-logo-png {
+    height: 40px;
+}
+
+.brand-logo-png img {
+    max-height: 80px;
+    width: auto;
+    transform: scale(0.5);
+    transform-origin: center center;
+}
+
+/* Supreme logo at full size (not scaled down) */
+.brand-logo-supreme img {
+    transform: scale(1);
+    max-height: 40px;
+}
+
+/* Pokemon logo at full size (not scaled down) */
+.brand-logo-pokemon img {
+    transform: scale(1);
+    max-height: 40px;
+}
+
+/* Hot Wheels logo at full size (not scaled down) */
+.brand-logo-hotwheels img {
+    transform: scale(1);
+    max-height: 40px;
+}
+
+/* Ralph Lauren logo at 190px width */
+.brand-logo-ralphlauren img {
+    width: 190px;
+    max-width: 190px;
+    height: auto;
+}
+
+/* Nike logo larger size */
+.brand-logo-nike img {
+    transform: scale(1.3);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    body {
+        padding: 0;
+    }
+
+    .container {
+        padding: 0;
+        max-width: 100%;
+        align-items: flex-start;
+    }
+
+    .content {
+        max-width: 100%;
+        width: 100%;
+        gap: 40px;
+        align-items: flex-start;
+        text-align: left;
+    }
+
+    .logo {
+        justify-content: flex-start;
+    }
+
+    .logo img {
+        width: 140px;
+        height: auto;
+    }
+
+    .main-text {
+        text-align: left;
+    }
+
+    .main-text p {
+        font-size: 24px;
+        line-height: 32px;
+        text-align: left;
+    }
+
+    .cta-wrapper {
+        width: 100%;
+    }
+
+    .cta-container {
+        width: 100%;
+        height: 56px;
+    }
+
+    .cta-input {
+        height: 56px;
+        font-size: 14px;
+        padding: 0 200px 0 24px;
+    }
+
+    .cta-submit-button {
+        height: 46px;
+        font-size: 14px;
+        padding: 0 24px;
+    }
+
+    .brands-wrapper {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0;
+    }
+
+    .content {
+        gap: 30px;
+        align-items: flex-start;
+    }
+
+    .logo {
+        justify-content: flex-start;
+    }
+
+    .logo img {
+        width: 120px;
+        height: auto;
+    }
+
+    .main-text {
+        text-align: left;
+    }
+
+    .main-text p {
+        font-size: 20px;
+        line-height: 28px;
+        text-align: left;
+    }
+
+    .cta-wrapper {
+        width: 100%;
+    }
+
+    .cta-container {
+        height: 52px;
+    }
+
+    .cta-input {
+        height: 52px;
+        font-size: 13px;
+        padding: 0 180px 0 20px;
+    }
+
+    .cta-submit-button {
+        height: 42px;
+        font-size: 13px;
+        padding: 0 20px;
+    }
+
+    .success-message {
+        height: 52px;
+    }
+
+    .success-message span {
+        font-size: 16px;
+        letter-spacing: 1.5px;
+    }
+
+    .brands-wrapper {
+        display: none;
+    }
+}
+
+

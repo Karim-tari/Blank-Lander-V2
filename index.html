@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blink - Your Ultimate Personal Shopper</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Main Content -->
+        <div class="content">
+            <!-- Logo -->
+            <div class="logo">
+                <img src="assets/blink.png" alt="Blink Logo">
+            </div>
+
+            <div class="main-text">
+                <p>Hey, I'm Blink. I'm Your ultimate personal shopper.</p>
+                <p>&nbsp;</p>
+                <p>I save you time and money every time you buy something online. I check for coupons and discounts so you always get the best deal.</p>
+                <p>&nbsp;</p>
+                <p>You can send me a link, photo, or tell me what you want and I'll buy it for you instantly.</p>
+            </div>
+
+            <!-- CTA Input with Button -->
+            <div class="cta-wrapper">
+                <div class="cta-container">
+                    <input type="email" class="cta-input" placeholder="YOUR EMAIL" />
+                    <button type="button" class="cta-submit-button">
+                        <span class="button-content">
+                            <span class="button-text-label">Join the waitlist</span>
+                            <svg class="button-arrow-icon" height="16" stroke-linejoin="round" viewBox="0 0 16 16" width="16">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M9.53033 2.21968L9 1.68935L7.93934 2.75001L8.46967 3.28034L12.4393 7.25001H1.75H1V8.75001H1.75H12.4393L8.46967 12.7197L7.93934 13.25L9 14.3107L9.53033 13.7803L14.6036 8.70711C14.9941 8.31659 14.9941 7.68342 14.6036 7.2929L9.53033 2.21968Z" fill="currentColor"></path>
+                            </svg>
+                        </span>
+                    </button>
+                    <p class="cta-message"></p>
+                </div>
+                <div class="success-message">
+                    <span class="success-text">You're on the list</span>
+                </div>
+            </div>
+            
+            <!-- YouTube Thumbnail -->
+            <div class="yt-thumb-container">
+                <img src="assets/yt-thumb.png" alt="Video Preview" class="yt-thumb" />
+            </div>
+        </div>
+    </div>
+
+    <!-- Brand Logos Section -->
+    <div class="brands-wrapper">
+        <div class="brands-section">
+            <div class="divider-line left"></div>
+            <p class="brands-text">Blink can shop for you on any store online such as</p>
+            <div class="divider-line right"></div>
+        </div>
+
+        <div class="brands-carousel">
+            <div class="brand-logo brand-logo-png brand-logo-supreme">
+                <img src="assets/brands/supreme.png" alt="Supreme">
+            </div>
+            <div class="brand-logo">
+                <img src="assets/brands/lego.svg" alt="LEGO">
+            </div>
+            <div class="brand-logo">
+                <img src="assets/brands/barbie.svg" alt="Barbie">
+            </div>
+            <div class="brand-logo brand-logo-nike">
+                <img src="assets/brands/nike.svg" alt="Nike">
+            </div>
+            <div class="brand-logo">
+                <img src="assets/brands/pokemon.svg" alt="Pokemon">
+            </div>
+            <div class="brand-logo">
+                <img src="assets/brands/amazon.svg" alt="Amazon">
+            </div>
+            <div class="brand-logo">
+                <img src="assets/brands/jordan.svg" alt="Jordan">
+            </div>
+            <div class="brand-logo">
+                <img src="assets/brands/kith.svg" alt="Kith">
+            </div>
+            <div class="brand-logo brand-logo-ralphlauren">
+                <img src="assets/brands/ralphlauren.svg" alt="Ralph Lauren">
+            </div>
+            <div class="brand-logo">
+                <img src="assets/brands/adidas.svg" alt="Adidas">
+            </div>
+            <div class="brand-logo">
+                <img src="assets/brands/funko.svg" alt="Funko">
+            </div>
+            <div class="brand-logo">
+                <img src="assets/brands/louisvuitton.svg" alt="Louis Vuitton">
+            </div>
+            <div class="brand-logo">
+                <img src="assets/brands/travisscott.svg" alt="Travis Scott">
+            </div>
+        </div>
+    </div>
+
+    <!-- Audio Element - muted to allow autoplay -->
+    <audio id="typingSound" preload="auto" muted>
+        <source src="assets/typing.mp3" type="audio/mpeg">
+        <source src="assets/typing.wav" type="audio/wav">
+    </audio>
+
+    <!-- GSAP Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/TextPlugin.min.js"></script>
+    
+    <script>
+        // Register GSAP plugins
+        gsap.registerPlugin(TextPlugin);
+
+        // Wait for DOM to load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get typing sound element
+            const typingSound = document.getElementById('typingSound');
+            
+            console.log('🎵 Audio element found:', typingSound);
+            console.log('📁 Audio source:', typingSound.currentSrc);
+            
+            // Listen for audio load events
+            typingSound.addEventListener('loadeddata', () => {
+                console.log('✅ Audio file loaded successfully');
+            });
+            
+            typingSound.addEventListener('error', (e) => {
+                console.error('❌ Audio loading error:', e);
+            });
+            
+            // Autoplay workaround: start muted (allowed), then unmute
+            const playAudio = () => {
+                console.log('🎬 Starting audio (muted to bypass autoplay restriction)...');
+                
+                // Play muted first (this is allowed by browsers)
+                typingSound.play().then(() => {
+                    console.log('✅ Audio playing (muted)');
+                    
+                    // Unmute after a tiny delay to hear the sound
+                    setTimeout(() => {
+                        typingSound.muted = false;
+                        typingSound.volume = 0.7;
+                        console.log('🔊 Audio unmuted - you should hear it now!');
+                    }, 50);
+                }).catch(err => {
+                    console.error('❌ Even muted autoplay failed:', err);
+                });
+            };
+            
+            // Try to play immediately if already loaded, otherwise wait
+            if (typingSound.readyState >= 2) {
+                playAudio();
+            } else {
+                typingSound.addEventListener('canplaythrough', playAudio, { once: true });
+            }
+            
+            // Get all paragraphs in main-text
+            const textContainer = document.querySelector('.main-text');
+            const contentContainer = document.querySelector('.content');
+            const paragraphs = textContainer.querySelectorAll('p');
+            
+            // Split text into words and wrap each in a span
+            paragraphs.forEach(p => {
+                if (p.innerHTML === '&nbsp;') return; // Skip empty paragraphs
+                
+                const text = p.textContent;
+                const words = text.split(' ');
+                p.innerHTML = words.map(word => `<span class="word">${word}</span>`).join(' ');
+            });
+            
+            // Get all word spans
+            const wordSpans = textContainer.querySelectorAll('.word');
+            
+            // Set initial state - invisible, blurred, and slightly to the right
+            gsap.set(wordSpans, {
+                opacity: 0,
+                filter: 'blur(20px)',
+                x: 25,
+                display: 'inline-block'
+            });
+            
+            // Build cumulative delays to ensure linear order with thinking pauses
+            let cumulativeDelay = 0;
+            const staggerDelays = [];
+            
+            wordSpans.forEach((word, index) => {
+                // Base speed between words
+                let wordDelay = 0.035;
+                
+                // Occasionally add a "thinking pause" (about 20% of words)
+                if (Math.random() < 0.2) {
+                    wordDelay += (Math.random() * 0.08 + 0.07); // Extra 0.07-0.15s pause
+                }
+                
+                // Longer pause after punctuation
+                const text = word.textContent;
+                if (text.includes('.') || text.includes(',')) {
+                    wordDelay += 0.12; // Pause after punctuation
+                }
+                
+                staggerDelays.push(cumulativeDelay);
+                cumulativeDelay += wordDelay;
+            });
+            
+            // Animate words in sequence - sliding from right to left (AI typing effect)
+            wordSpans.forEach((word, index) => {
+                gsap.to(word, {
+                    opacity: 1,
+                    filter: 'blur(0px)',
+                    x: 0,
+                    duration: 0.3,
+                    ease: 'power3.out',
+                    delay: 0.2 + staggerDelays[index]
+                });
+            });
+            
+            // Animate CTA input field - fade, blur, and slide up on page load
+            const ctaContainer = document.querySelector('.cta-container');
+            const ctaInput = document.querySelector('.cta-input');
+            const ctaSubmitButton = document.querySelector('.cta-submit-button');
+            const ctaMessage = document.querySelector('.cta-message');
+            
+            // Set initial state - below, invisible, and blurred (all at once)
+            gsap.set(ctaContainer, {
+                opacity: 0,
+                y: 30,
+                filter: 'blur(20px)'
+            });
+            
+            // Animate everything simultaneously - slide up, fade, and blur together
+            gsap.to(ctaContainer, {
+                opacity: 1,
+                y: 0,
+                filter: 'blur(0px)',
+                duration: 0.8,
+                ease: 'power3.out',
+                delay: 1.0
+            });
+            
+            // Email validation function
+            function isValidEmail(email) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailRegex.test(email);
+            }
+            
+            // Show message function
+            function showMessage(message, type) {
+                ctaMessage.textContent = message;
+                ctaMessage.className = `cta-message ${type}`;
+                
+                gsap.to(ctaMessage, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.4,
+                    ease: 'power2.out'
+                });
+            }
+            
+            // Hide message function
+            function hideMessage() {
+                gsap.to(ctaMessage, {
+                    opacity: 0,
+                    y: -10,
+                    duration: 0.3,
+                    ease: 'power2.in'
+                });
+            }
+            
+            // Submit button click handler
+            ctaSubmitButton.addEventListener('click', () => {
+                const email = ctaInput.value.trim();
+                
+                // Remove previous states
+                ctaInput.classList.remove('error', 'success');
+                hideMessage();
+                
+                // Validate email
+                if (!email) {
+                    ctaInput.classList.add('error');
+                    showMessage('Please enter your email address', 'error');
+                    return;
+                }
+                
+                if (!isValidEmail(email)) {
+                    ctaInput.classList.add('error');
+                    showMessage('Please enter a valid email address', 'error');
+                    return;
+                }
+                
+                // Success state - hide input/button and show success message
+                const timeline = gsap.timeline();
+                
+                // Fade out and scale down the entire input container
+                timeline.to(ctaContainer, {
+                    opacity: 0,
+                    scale: 0.95,
+                    duration: 0.4,
+                    ease: 'power2.in'
+                });
+                
+                // Show success message with sleek animation
+                timeline.call(() => {
+                    const successText = document.querySelector('.success-text');
+                    // Split text into individual characters for stagger animation
+                    const text = successText.textContent;
+                    successText.innerHTML = text.split('').map(char => 
+                        `<span class="char">${char === ' ' ? '&nbsp;' : char}</span>`
+                    ).join('');
+                });
+                
+                // Set initial state for characters and container
+                timeline.set('.success-message', { opacity: 1 });
+                timeline.set('.success-text .char', {
+                    opacity: 0,
+                    y: 20,
+                    filter: 'blur(8px)'
+                });
+                
+                // Stagger animate characters with blur and slide
+                timeline.to('.success-text .char', {
+                    opacity: 1,
+                    y: 0,
+                    filter: 'blur(0px)',
+                    duration: 0.5,
+                    stagger: 0.02,
+                    ease: 'power3.out'
+                });
+                
+                // Wait 3.5 seconds, then fade out message with blur
+                timeline.to('.success-text .char', {
+                    opacity: 0,
+                    y: -10,
+                    filter: 'blur(5px)',
+                    duration: 0.4,
+                    stagger: 0.015,
+                    ease: 'power2.in',
+                    delay: 3.5
+                });
+                
+                timeline.to('.success-message', {
+                    opacity: 0,
+                    duration: 0.3,
+                    ease: 'power2.in'
+                }, '-=0.2');
+                
+                // Reset and bring back the input field
+                timeline.call(() => {
+                    ctaInput.value = '';
+                    ctaInput.classList.remove('success', 'error');
+                });
+                
+                timeline.to(ctaContainer, {
+                    opacity: 1,
+                    scale: 1,
+                    duration: 0.6,
+                    ease: 'back.out(1.2)'
+                });
+            });
+            
+            // Clear error state when user starts typing
+            ctaInput.addEventListener('input', () => {
+                if (ctaInput.classList.contains('error')) {
+                    ctaInput.classList.remove('error');
+                    hideMessage();
+                }
+            });
+            
+            // Submit on Enter key press
+            ctaInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    ctaSubmitButton.click();
+                }
+            });
+            
+            // Animate YouTube thumbnail
+            const ytThumb = document.querySelector('.yt-thumb');
+            
+            if (ytThumb) {
+                gsap.set(ytThumb, {
+                    opacity: 0,
+                    y: 30
+                });
+                
+                gsap.to(ytThumb, {
+                    opacity: 0.9,
+                    y: 0,
+                    duration: 1,
+                    ease: 'power3.out',
+                    delay: 1.5
+                });
+            }
+            
+            // Duplicate logos for infinite scroll on mobile
+            const brandsCarousel = document.querySelector('.brands-carousel');
+            if (window.innerWidth <= 768 && brandsCarousel) {
+                const logos = Array.from(brandsCarousel.children);
+                logos.forEach(logo => {
+                    const clone = logo.cloneNode(true);
+                    brandsCarousel.appendChild(clone);
+                });
+            }
+            
+            // Animate brand section - starts immediately on page load
+            const brandsSection = document.querySelector('.brands-section');
+            const dividerLines = brandsSection.querySelectorAll('.divider-line');
+            const brandsText = brandsSection.querySelector('.brands-text');
+            const brandLogos = document.querySelectorAll('.brand-logo');
+            
+            // Set initial state for brands section elements
+            gsap.set([dividerLines, brandsText], {
+                opacity: 0,
+                y: 10
+            });
+            
+            // Animate divider lines and text - starts right away
+            gsap.to(dividerLines, {
+                opacity: 1,
+                y: 0,
+                duration: 0.6,
+                ease: 'power2.out',
+                delay: 0.3,
+                stagger: 0.1
+            });
+            
+            gsap.to(brandsText, {
+                opacity: 1,
+                y: 0,
+                duration: 0.6,
+                ease: 'power2.out',
+                delay: 0.45
+            });
+            
+            // Set initial state for brand logos
+            gsap.set(brandLogos, {
+                opacity: 0,
+                scale: 0.8
+            });
+            
+            // Animate brand logos in with staggered fade - starts right away
+            gsap.to(brandLogos, {
+                opacity: 1,
+                scale: 1,
+                duration: 0.4,
+                ease: 'back.out(1.2)',
+                delay: 0.7,
+                stagger: {
+                    amount: 0.8,
+                    from: "start"
+                }
+            });
+            
+            // Cursor Product Effect - Images pop out when cursor moves
+            const products = [
+                'assets/products/jordans.png',
+                'assets/products/labubu.png',
+                'assets/products/supreme.png',
+                'assets/products/funko.png',
+                'assets/products/hotwheels truck.png',
+                'assets/products/ps5 controller.png',
+                'assets/products/adidas.png',
+                'assets/products/ds.png',
+                'assets/products/nba.png',
+                'assets/products/watch.png',
+                'assets/products/backpack.png',
+                'assets/products/chess.png',
+                'assets/products/hermes.png',
+                'assets/products/jacket.png',
+                'assets/products/laika.png',
+                'assets/products/lego.png',
+                'assets/products/mickey.png',
+                'assets/products/nike.png',
+                'assets/products/omega.png',
+                'assets/products/visionpro.png',
+                'assets/products/bike.png',
+                'assets/products/bobross.png',
+                'assets/products/chair.png',
+                'assets/products/new-balance watch.png',
+                'assets/products/nike-lndn.png'
+            ];
+            
+            let lastMouseX = 0;
+            let lastMouseY = 0;
+            let lastMouseTime = Date.now();
+            let isMoving = false;
+            let moveTimeout;
+            let lastSpawnTime = 0;
+            const spawnDelay = 30; // milliseconds between spawns - even more products!
+            const speedThreshold = 0.8; // pixels per millisecond - triggers easier/faster!
+            const recentProducts = []; // Track recently used products to prevent repetition
+            const recentProductsLimit = 10; // Don't repeat an image within the last 10 spawns
+            
+            // Delay cursor effect activation by 2 seconds
+            let cursorEffectEnabled = false;
+            setTimeout(() => {
+                cursorEffectEnabled = true;
+            }, 2000);
+            
+            document.addEventListener('mousemove', (e) => {
+                const currentTime = Date.now();
+                const deltaTime = currentTime - lastMouseTime;
+                
+                // Check if hovering over input/button/text - don't spawn if so
+                const target = e.target;
+                const isOverExcludedArea = target.closest('.cta-wrapper') || 
+                                           target.closest('.cta-container') || 
+                                           target.classList.contains('cta-input') || 
+                                           target.classList.contains('cta-submit-button') ||
+                                           target.closest('.main-text');
+                
+                // Calculate mouse velocity
+                const deltaX = e.clientX - lastMouseX;
+                const deltaY = e.clientY - lastMouseY;
+                const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+                const velocity = distance / deltaTime; // pixels per millisecond
+                
+                // Check if cursor actually moved and is moving fast enough
+                if (e.clientX !== lastMouseX || e.clientY !== lastMouseY) {
+                    isMoving = true;
+                    
+                    // Clear existing timeout
+                    clearTimeout(moveTimeout);
+                    
+                    // Only spawn if effect is enabled, NOT over excluded area, moving fast enough, and enough time has passed
+                    if (cursorEffectEnabled && !isOverExcludedArea && velocity >= speedThreshold && currentTime - lastSpawnTime > spawnDelay) {
+                        spawnProduct(e.clientX, e.clientY);
+                        lastSpawnTime = currentTime;
+                    }
+                    
+                    // Update tracking variables
+                    lastMouseX = e.clientX;
+                    lastMouseY = e.clientY;
+                    lastMouseTime = currentTime;
+                    
+                    // Stop spawning after cursor stops
+                    moveTimeout = setTimeout(() => {
+                        isMoving = false;
+                    }, 100);
+                }
+            });
+            
+            function spawnProduct(x, y) {
+                // Filter out recently used products to prevent repetition
+                const availableProducts = products.filter(p => !recentProducts.includes(p));
+                
+                // If somehow all products are in recent (shouldn't happen with 20 products and 10 limit),
+                // just use all products
+                const productPool = availableProducts.length > 0 ? availableProducts : products;
+                
+                // Select a random product from the available pool
+                const selectedProduct = productPool[Math.floor(Math.random() * productPool.length)];
+                
+                // Add to recent products and maintain the limit
+                recentProducts.push(selectedProduct);
+                if (recentProducts.length > recentProductsLimit) {
+                    recentProducts.shift(); // Remove oldest product from tracking
+                }
+                
+                // Create product image element
+                const product = document.createElement('img');
+                product.className = 'cursor-product';
+                product.src = selectedProduct;
+                
+                // Position at cursor with slight random offset
+                const offsetX = (Math.random() - 0.5) * 40;
+                const offsetY = (Math.random() - 0.5) * 40;
+                product.style.left = (x + offsetX) + 'px';
+                product.style.top = (y + offsetY) + 'px';
+                
+                // Add to DOM
+                document.body.appendChild(product);
+                
+                // More organic random properties with subtle variations
+                const randomRotation = (Math.random() - 0.5) * 90; // -45° to +45° - keep images upright
+                const randomSpin = (Math.random() - 0.5) * 30; // Subtle spin during animation
+                const randomX = (Math.random() - 0.5) * 100; // -50 to 50px
+                const randomY = -40 - Math.random() * 60; // -40 to -100px
+                
+                // Varied sizing - more dynamic range
+                const sizeVariation = 0.6 + Math.random() * 0.8; // 0.6 to 1.4 - subtle size differences
+                const randomScale = sizeVariation;
+                
+                // Varied timing for more organic feel - wider range to feel less robotic
+                const holdDuration = 0.2 + Math.random() * 0.5; // 0.2 to 0.7s - varied hold before fading
+                const fadeDuration = 0.25 + Math.random() * 0.4; // 0.25 to 0.65s - varied exit timing
+                
+                // Varied initial opacity for depth
+                const initialOpacity = 0.8 + Math.random() * 0.2; // 0.8 to 1.0
+                
+                // Much more subtle blur variation
+                const initialBlur = Math.random() * 0.5; // 0 to 0.5px - barely noticeable
+                const endBlur = 3 + Math.random() * 2; // 3 to 5px - subtle blur as they exit
+                
+                // Varied animation easing for organic feel
+                const easings = ['power2.out', 'power1.out', 'sine.out'];
+                const randomEasing = easings[Math.floor(Math.random() * easings.length)];
+                
+                // Animate with GSAP
+                const timeline = gsap.timeline({
+                    onComplete: () => {
+                        product.remove(); // Clean up after animation
+                    }
+                });
+                
+                // Initial state - smaller, invisible, with subtle blur
+                gsap.set(product, {
+                    opacity: 0,
+                    scale: 0.2,
+                    rotation: randomRotation,
+                    filter: `blur(${initialBlur}px)`
+                });
+                
+                // Pop in with organic bounce and varied opacity
+                timeline.to(product, {
+                    opacity: initialOpacity,
+                    scale: randomScale,
+                    duration: 0.12,
+                    ease: 'back.out(3)'
+                });
+                
+                // Hold in place - stay visible so you can see the image
+                timeline.to(product, {
+                    x: randomX * 0.3,
+                    y: randomY * 0.3,
+                    rotation: randomRotation + randomSpin * 0.5,
+                    duration: holdDuration,
+                    ease: 'power1.out'
+                });
+                
+                // Quick fade out
+                timeline.to(product, {
+                    x: randomX,
+                    y: randomY,
+                    rotation: randomRotation + randomSpin,
+                    opacity: 0,
+                    scale: randomScale * 0.2,
+                    filter: `blur(${endBlur}px)`,
+                    duration: fadeDuration,
+                    ease: randomEasing
+                }, '-=0.1');
+            }
+            
+        });
+    </script>
+</body>
+</html>
+
