@@ -167,17 +167,22 @@
             const contentContainer = document.querySelector('.content');
             const paragraphs = textContainer.querySelectorAll('p');
             
-            // Split text into words and wrap each in a span
+            // Split text into words, then split words into characters
             paragraphs.forEach(p => {
                 if (p.innerHTML === '&nbsp;') return; // Skip empty paragraphs
                 
                 const text = p.textContent;
                 const words = text.split(' ');
-                p.innerHTML = words.map(word => `<span class="word">${word}</span>`).join(' ');
+                p.innerHTML = words.map(word => {
+                    const chars = word.split('');
+                    const charSpans = chars.map(char => `<span class="char">${char}</span>`).join('');
+                    return `<span class="word">${charSpans}</span>`;
+                }).join(' ');
             });
             
-            // Get all word spans
+            // Get all word and character spans
             const wordSpans = textContainer.querySelectorAll('.word');
+            const charSpans = textContainer.querySelectorAll('.char');
             
             // Set initial state - invisible, blurred, and slightly to the right
             gsap.set(wordSpans, {
@@ -221,6 +226,43 @@
                     delay: 0.2 + staggerDelays[index]
                 });
             });
+            
+            // Calculate when text animation finishes
+            const textAnimationDuration = 0.2 + cumulativeDelay + 0.3;
+            
+            console.log('🌟 Shimmer setup - found', charSpans.length, 'characters');
+            
+            // Working shimmer implementation using stagger with smooth fall-off
+            function createShimmerWave() {
+                gsap.to(charSpans, {
+                    color: '#ffffff',
+                    textShadow: '0 0 30px rgba(255, 255, 255, 1), 0 0 50px rgba(255, 255, 255, 0.8), 0 0 70px rgba(255, 255, 255, 0.7)',
+                    duration: 0.8,
+                    ease: 'sine.inOut',
+                    stagger: {
+                        each: 0.015,
+                        yoyo: true,
+                        repeat: 1
+                    },
+                    onComplete: function() {
+                        // Reset all back to base state
+                        gsap.set(charSpans, {
+                            color: 'rgba(255, 255, 255, 0.8)',
+                            textShadow: 'none'
+                        });
+                    }
+                });
+            }
+            
+            // Start shimmer after text finishes, then repeat
+            setTimeout(() => {
+                console.log('✨ Starting shimmer!');
+                createShimmerWave();
+                setInterval(() => {
+                    console.log('🔄 Shimmer repeating...');
+                    createShimmerWave();
+                }, 6000); // Repeat every 6 seconds
+            }, (textAnimationDuration + 1.5) * 1000);
             
             // Animate CTA input field - fade, blur, and slide up on page load
             const ctaContainer = document.querySelector('.cta-container');

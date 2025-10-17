@@ -123,7 +123,11 @@ body::before {
 .main-text .word {
     display: inline-block;
     white-space: nowrap;
-    color: #eee;
+}
+
+.main-text .char {
+    display: inline-block;
+    color: rgba(255, 255, 255, 0.8);
 }
 
 .cta-wrapper {
@@ -502,36 +506,34 @@ body::before {
     .container {
         padding: 0;
         max-width: 100%;
-        align-items: center;
+        align-items: stretch;
         justify-content: space-between;
         flex: 1;
         display: flex;
         flex-direction: column;
         padding-top: 40px;
-        padding-bottom: 0;
+        padding-bottom: 40px;
         position: relative;
+        min-height: 100vh;
     }
 
     .content {
         max-width: 100%;
         width: 100%;
-        gap: 40px;
-        align-items: center;
-        text-align: center;
+        gap: 0;
+        align-items: stretch;
         flex: 1;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: space-between;
     }
 
     .logo {
-        justify-content: center;
-        align-self: center;
-        position: absolute;
-        top: 40px;
-        left: 0;
-        right: 0;
+        justify-content: flex-start;
+        align-self: flex-start;
         width: 100%;
+        flex: 0 0 auto;
+        margin-bottom: 0;
     }
 
     .logo img {
@@ -540,18 +542,25 @@ body::before {
     }
 
     .main-text {
-        text-align: center;
+        text-align: left;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-self: flex-start;
     }
 
     .main-text p {
         font-size: 24px;
         line-height: 32px;
-        text-align: center;
+        text-align: left;
     }
 
     .cta-wrapper {
         width: 100%;
         height: auto;
+        flex: 0 0 auto;
+        margin-bottom: 60px;
     }
 
     .cta-container {
@@ -576,7 +585,7 @@ body::before {
         top: auto;
         transform: none;
         height: 56px;
-        font-size: 14px;
+        font-size: 16px;
         padding: 0 24px;
         width: 100%;
     }
@@ -595,8 +604,12 @@ body::before {
 
     .privacy-link {
         display: block !important;
-        margin-top: auto;
-        padding-bottom: 20px;
+        position: absolute;
+        bottom: 20px;
+        left: 0;
+        right: 0;
+        margin: 0;
+        padding: 0;
     }
 
     .brands-wrapper {
@@ -607,18 +620,13 @@ body::before {
 @media (max-width: 480px) {
     .container {
         padding: 0;
-        padding-top: 0;
-        padding-bottom: 0;
+        padding-top: 30px;
+        padding-bottom: 30px;
     }
 
     .content {
-        gap: 30px;
-        align-items: center;
-        text-align: center;
-    }
-
-    .logo {
-        top: 30px;
+        gap: 0;
+        align-items: stretch;
     }
 
     .logo img {
@@ -627,18 +635,20 @@ body::before {
     }
 
     .main-text {
-        text-align: center;
+        text-align: left;
     }
 
     .main-text p {
         font-size: 20px;
         line-height: 28px;
-        text-align: center;
+        text-align: left;
     }
 
     .cta-wrapper {
         width: 100%;
         height: auto;
+        flex: 0 0 auto;
+        margin-bottom: 50px;
     }
 
     .cta-container {
@@ -662,7 +672,7 @@ body::before {
         top: auto;
         transform: none;
         height: 52px;
-        font-size: 13px;
+        font-size: 15px;
         padding: 0 20px;
         width: 100%;
     }
@@ -686,7 +696,7 @@ body::before {
 
     .privacy-link {
         display: block !important;
-        padding-bottom: 15px;
+        bottom: 15px;
     }
 
     .brands-wrapper {
