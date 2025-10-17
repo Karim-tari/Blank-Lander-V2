@@ -38,7 +38,7 @@
                     <p class="cta-message"></p>
                 </div>
                 <div class="success-message">
-                    <span class="success-text">You're on the list</span>
+                    <span class="success-text">You're now on the list</span>
                 </div>
             </div>
             
@@ -337,61 +337,30 @@
                     return;
                 }
                 
-                // Success state - hide input/button and show success message
+                // Success state - simple and minimal
                 const timeline = gsap.timeline();
                 
-                // Fade out and scale down the entire input container
+                // Fade out input container
                 timeline.to(ctaContainer, {
-                    opacity: 0,
-                    scale: 0.95,
-                    duration: 0.4,
-                    ease: 'power2.in'
-                });
-                
-                // Show success message with sleek animation
-                timeline.call(() => {
-                    const successText = document.querySelector('.success-text');
-                    // Split text into individual characters for stagger animation
-                    const text = successText.textContent;
-                    successText.innerHTML = text.split('').map(char => 
-                        `<span class="char">${char === ' ' ? '&nbsp;' : char}</span>`
-                    ).join('');
-                });
-                
-                // Set initial state for characters and container
-                timeline.set('.success-message', { opacity: 1 });
-                timeline.set('.success-text .char', {
-                    opacity: 0,
-                    y: 20,
-                    filter: 'blur(8px)'
-                });
-                
-                // Stagger animate characters with blur and slide
-                timeline.to('.success-text .char', {
-                    opacity: 1,
-                    y: 0,
-                    filter: 'blur(0px)',
-                    duration: 0.5,
-                    stagger: 0.02,
-                    ease: 'power3.out'
-                });
-                
-                // Wait 3.5 seconds, then fade out message with blur
-                timeline.to('.success-text .char', {
-                    opacity: 0,
-                    y: -10,
-                    filter: 'blur(5px)',
-                    duration: 0.4,
-                    stagger: 0.015,
-                    ease: 'power2.in',
-                    delay: 3.5
-                });
-                
-                timeline.to('.success-message', {
                     opacity: 0,
                     duration: 0.3,
                     ease: 'power2.in'
-                }, '-=0.2');
+                });
+                
+                // Show success message
+                timeline.to('.success-message', {
+                    opacity: 1,
+                    duration: 0.4,
+                    ease: 'power2.out'
+                });
+                
+                // Wait 3 seconds, then fade out and bring back input
+                timeline.to('.success-message', {
+                    opacity: 0,
+                    duration: 0.3,
+                    ease: 'power2.in',
+                    delay: 3
+                });
                 
                 // Reset and bring back the input field
                 timeline.call(() => {
@@ -401,9 +370,8 @@
                 
                 timeline.to(ctaContainer, {
                     opacity: 1,
-                    scale: 1,
-                    duration: 0.6,
-                    ease: 'back.out(1.2)'
+                    duration: 0.4,
+                    ease: 'power2.out'
                 });
             });
             
