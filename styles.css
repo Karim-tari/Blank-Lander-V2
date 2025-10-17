@@ -560,7 +560,8 @@ body::before {
         width: 100%;
         height: auto;
         flex: 0 0 auto;
-        margin-bottom: 60px;
+        margin-bottom: 40px;
+        padding-bottom: 40px;
     }
 
     .cta-container {
@@ -603,13 +604,7 @@ body::before {
     }
 
     .privacy-link {
-        display: block !important;
-        position: absolute;
-        bottom: 20px;
-        left: 0;
-        right: 0;
-        margin: 0;
-        padding: 0;
+        display: none !important;
     }
 
     .brands-wrapper {
@@ -648,7 +643,8 @@ body::before {
         width: 100%;
         height: auto;
         flex: 0 0 auto;
-        margin-bottom: 50px;
+        margin-bottom: 30px;
+        padding-bottom: 30px;
     }
 
     .cta-container {
@@ -695,8 +691,7 @@ body::before {
     }
 
     .privacy-link {
-        display: block !important;
-        bottom: 15px;
+        display: none !important;
     }
 
     .brands-wrapper {
